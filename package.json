@@ -28,7 +28,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@leadertechie/geo-hierarchy-un-m49": "^0.1.0-alpha.2"
+    "@leadertechie/geo-hierarchy-un-m49": "^0.1.0-alpha.3"
   },
   "devDependencies": {
     "typescript": "^5.4.0",
