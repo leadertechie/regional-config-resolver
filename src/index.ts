@@ -15,6 +15,9 @@
  * ```
  */
 
+import { LoggerInterface } from "@leadertechie/telemetry";
+import getDefaultLogger from "./telemetry-init";
+
 /**
  * Function type that provides a parent key for a given child key.
  * Allows integration with standard datasets like UN-M49 or ISO-3166.
@@ -57,7 +60,7 @@ export class RegionalConfigResolver<T> {
    * 5. If provider has no parent, use Prefix Step-down (hyphen splitting).
    * 6. Fallback to global wildcard (*).
    */
-  resolve(key: string): T | undefined {
+  resolve(key: string, logger?: LoggerInterface): T | undefined {
     let currentKey: string | undefined = key;
     const visited = new Set<string>();
 
@@ -94,7 +97,8 @@ export class RegionalConfigResolver<T> {
         currentKey = undefined;
       }
     }
-
+    const log = logger ?? getDefaultLogger("regional-config-resolver");
+    log.warn(`Config resolution failed for key: ${key}`);
     return undefined;
   }
 
